@@ -2,10 +2,22 @@ class TasksController < ApplicationController
 	def new   # tasks#new action
 		puts "Honey, I'm home!"
 		@task = Task.new
+		render :show_form
 	end
 	def create
 		@task = Task.create(task_params)
-    @tasks = Task.all
+		@tasks = Task.all
+		render :hide_form
+	end
+	def edit
+		@task = Task.find(params[:id])
+		render :show_form
+	end
+	def update
+		@task = Task.find(params[:id])
+		@task.update_attributes(task_params)
+		@tasks = Task.all
+		render :hide_form
 	end
 	def destroy
 		@task = Task.find(params[:id])
